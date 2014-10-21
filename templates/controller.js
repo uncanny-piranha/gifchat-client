@@ -1,4 +1,5 @@
-'use strict';
+;(function(){
+  'use strict';
 
 /**
  * @ngdoc function
@@ -7,11 +8,17 @@
  * # AboutCtrl
  * Controller of the gifchatClientApp
  */
-angular.module('gifchatClientApp')
-  .controller('AboutCtrl', function ($scope) {
+
+angular
+  .module('gifchatClientApp')
+  .controller('<%= name %>Ctrl', <%= name %>Ctrl);
+
+  function <%= name %>Ctrl ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-  });
+  }
+
+})();
