@@ -1,0 +1,17 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name gifchatClientApp.controller:AboutCtrl
+ * @description
+ * # AboutCtrl
+ * Controller of the gifchatClientApp
+ */
+angular.module('gifchatClientApp')
+  .controller('AboutCtrl', function ($scope) {
+    $scope.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
+  });
