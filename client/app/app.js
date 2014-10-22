@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -23,9 +24,9 @@ angular
         templateUrl: 'app/core/views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'app/core/views/about.html',
-        controller: 'AboutCtrl'
+      .when('/chatroom', {
+        templateUrl: 'app/core/views/chatroom.html',
+        controller: 'ChatroomCtrl'
       })
       .otherwise({
         redirectTo: '/'
