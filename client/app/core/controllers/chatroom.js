@@ -28,7 +28,7 @@ angular
     $scope.active=false;
     $scope.added=false;
 
-    var linkRef = new Firebase("https://fiery-torch-9779.firebaseio.com/usernames/"+$scope.username+ "/" +"messages");
+    var linkRef = new Firebase("https://sizzling-fire-1984.firebaseio.com/usernames/"+$scope.username+ "/" +"messages");
     var sync = $firebase(linkRef);
     $scope.messages = sync.$asArray();
 

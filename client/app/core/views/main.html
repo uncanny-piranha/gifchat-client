@@ -23,15 +23,15 @@
           </div>
       </div>
       <div ng-show="isLoggedIn()">
-        <h1 class="margin-base-vertical">Welcome back {{getCurrentUser().name}} did you miss me?</h1>
+        <h1 class="margin-base-vertical">Welcome back {{getCurrentUser().name}}</h1>
           <div>
-            <a href="/chatroom">
+            <a href="#/chatroom">
                 <button type="button" class="btn btn-default btn-lg">
                     <span class="glyphicon glyphicon-globe"></span>Take me back to the gifs!
                 </button>
             </a>
           </div>
-      </div>    
+      </div>
 
 
       <!-- SIGNUP FORM -->
@@ -94,9 +94,7 @@
           <button class="btn btn-inverse btn-lg btn-login" type="submit">
             Sign up
           </button>
-          <a class="btn btn-default btn-lg btn-register" href="/login">
-            Login
-          </a>
+
         </div>
 
         <hr>
@@ -117,7 +115,7 @@
 
       </form>
 
-      <!-- Loginn form -->
+      <!-- Login form -->
       <form class="form" name="form" ng-submit="login(form)" ng-show="activeLogin" novalidate>
 
         <div class="form-group">
@@ -171,4 +169,4 @@
       </div>
     </div><!-- //main content -->
   </div><!-- //row -->
-</div> 
+</div>
