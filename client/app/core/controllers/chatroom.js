@@ -13,13 +13,9 @@ angular
   .module('gifchatClientApp')
   .controller('ChatroomCtrl', ChatroomCtrl);
 
-  function ChatroomCtrl ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-    $scope.username = Auth.getCurrentUser().name
+  function ChatroomCtrl ($scope, Auth, $firebase, $location) {
+
+    $scope.username = Auth.getCurrentUser();
     $scope.userMessage;
     $scope.newUser;
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -32,31 +28,33 @@ angular
     $scope.active=false;
     $scope.added=false;
 
-    var linkRef = new Firebase("https://fiery-torch-9779.firebaseio.com/usernames/"+$scope.username+ "/" +"messages");
+    var linkRef = new Firebase("https://sizzling-fire-1984.firebaseio.com/usernames/"+$scope.username+ "/" +"messages");
     var sync = $firebase(linkRef);
     $scope.messages = sync.$asArray();
 
     $scope.addMessage = function(text) {
-      $scope.privateMessages.$add({username: $scope.username, text: text});
-      $scope.friendsMessages.$add({username: $scope.username, text: text});
-      $scope.userMessage = '';
-    }
+      // should post to our server
+      Auth.sendMessage($scope.friendsName, $scope.username, text);
+    };
+
     $scope.setFriendUsername = function(user){
       $scope.friendsName = user;
       $scope.chosenPrivate=true;
-      var userRef = new Firebase("https://fiery-torch-9779.firebaseio.com/usernames/" + $scope.username + '/' +"messages"+ "/" + user);
-      var otherUserRef = new Firebase("https://fiery-torch-9779.firebaseio.com/usernames/" + user + '/' +"messages"+ "/" + $scope.username);
-      var otherSync = $firebase(otherUserRef)
+      var userRef = new Firebase("https://sizzling-fire-1984.firebaseio.com/usernames/" + $scope.username + '/' +"messages"+ "/" + user);
+      var otherUserRef = new Firebase("https://sizzling-fire-1984.firebaseio.com/usernames/" + user + '/' +"messages"+ "/" + $scope.username);
+      var otherSync = $firebase(otherUserRef);
       var synchy = $firebase(userRef);
       $scope.friendsMessages = otherSync.$asArray();
-      $scope.privateMessages = synchy.$asArray(); 
-    }
+      $scope.privateMessages = synchy.$asArray();
+    };
     $scope.addFriend = function() {
       $scope.added = !$scope.added;
-    }
+    };
+
     $scope.activate = function(){
       $scope.active = !$scope.active;
-    }
+    };
+
     $scope.logout = function() {
       Auth.logout();
       $location.path('/');

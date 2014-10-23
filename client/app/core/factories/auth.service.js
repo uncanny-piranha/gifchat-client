@@ -2,9 +2,9 @@
 
 angular.module('gifchatClientApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
-    var currentUser = {};
+    var currentUser = '';
     if($cookieStore.get('token')) {
-      currentUser = User.get();
+      currentUser = $cookieStore.get('username');
     }
 
     return {
@@ -12,90 +12,53 @@ angular.module('gifchatClientApp')
       /**
        * Authenticate user and save token
        *
-       * @param  {Object}   user     - login info
-       * @param  {Function} callback - optional
-       * @return {Promise}
        */
-      login: function(user, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
+      login: function(user) {
 
-        $http.post('/auth/local', {
+        return $http.post('http://gifserver.azurewebsites.net/users/login', {
           email: user.email,
           password: user.password
         }).
         success(function(data) {
           $cookieStore.put('token', data.token);
-          currentUser = User.get();
-          deferred.resolve(data);
-          return cb();
-        }).
-        error(function(err) {
-          this.logout();
-          deferred.reject(err);
-          return cb(err);
-        }.bind(this));
-
-        return deferred.promise;
+          $cookieStore.put('username', data.username);
+          currentUser = data.username;
+        })
+        .error(function(err){
+          console.log(err);
+        });
       },
 
       /**
        * Delete access token and user info
        *
-       * @param  {Function}
        */
       logout: function() {
         $cookieStore.remove('token');
-        currentUser = {};
+        currentUser = '';
       },
 
       /**
        * Create a new user
        *
-       * @param  {Object}   user     - user info
-       * @param  {Function} callback - optional
-       * @return {Promise}
        */
-      createUser: function(user, callback) {
-        var cb = callback || angular.noop;
-
-        return User.save(user,
-          function(data) {
-            $cookieStore.put('token', data.token);
-            currentUser = User.get();
-            return cb(user);
-          },
-          function(err) {
-            this.logout();
-            return cb(err);
-          }.bind(this)).$promise;
+      createUser: function(user) {
+        return $http.post('http://gifserver.azurewebsites.net/users/signup', {
+          username: user.name,
+          email: user.email,
+          password: user.password
+        })
+        .success(function(data){
+          $cookieStore.put('token', data.token);
+          $cookieStore.put('username', data.username);
+          currentUser = data.username;
+        });
       },
 
-      /**
-       * Change password
-       *
-       * @param  {String}   oldPassword
-       * @param  {String}   newPassword
-       * @param  {Function} callback    - optional
-       * @return {Promise}
-       */
-      changePassword: function(oldPassword, newPassword, callback) {
-        var cb = callback || angular.noop;
-
-        return User.changePassword({ id: currentUser._id }, {
-          oldPassword: oldPassword,
-          newPassword: newPassword
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
-        }).$promise;
-      },
 
       /**
        * Gets all available info on authenticated user
        *
-       * @return {Object} user
        */
       getCurrentUser: function() {
         return currentUser;
@@ -104,38 +67,25 @@ angular.module('gifchatClientApp')
       /**
        * Check if a user is logged in
        *
-       * @return {Boolean}
        */
       isLoggedIn: function() {
-        return currentUser.hasOwnProperty('role');
-      },
-
-      /**
-       * Waits for currentUser to resolve before checking if user is logged in
-       */
-      isLoggedInAsync: function(cb) {
-        if(currentUser.hasOwnProperty('$promise')) {
-          currentUser.$promise.then(function() {
-            cb(true);
-          }).catch(function() {
-            cb(false);
-          });
-        } else if(currentUser.hasOwnProperty('role')) {
-          cb(true);
+        if ($cookieStore.get('token')) {
+          return true;
         } else {
-          cb(false);
+          return false;
         }
       },
 
-      /**
-       * Check if a user is an admin
-       *
-       * @return {Boolean}
-       */
-      isAdmin: function() {
-        return currentUser.role === 'admin';
+      sendMessage: function(to, from, keyword) {
+        return $http.post('http://gifserver.azurewebsites.net/gifs', {
+          to: to,
+          from: from,
+          keyword: keyword
+        })
+        .error(function(err){
+          console.log(err);
+        });
       },
-
       /**
        * Get auth token
        */

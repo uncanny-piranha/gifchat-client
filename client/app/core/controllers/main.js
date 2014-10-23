@@ -8,12 +8,8 @@
  * Controller of the gifchatClientApp
  */
 angular.module('gifchatClientApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, $http, Auth, $location) {
+
     $scope.user = {};
     $scope.errors = {};
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -22,21 +18,6 @@ angular.module('gifchatClientApp')
     $scope.activeLogin=false;
     $scope.activeSignup=false;
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
     $scope.register = function(form) {
       $scope.submitted = true;
 
@@ -61,10 +42,6 @@ angular.module('gifchatClientApp')
           });
         });
       }
-    };
-
-    $scope.loginOauth = function(provider) {
-      $window.location.href = '/auth/' + provider;
     };
 
     $scope.login = function(form) {
