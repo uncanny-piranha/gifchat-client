@@ -8,6 +8,8 @@
  *
  * Main module of the application.
  */
+
+ // add in new dependencies below
 angular
   .module('gifchatClientApp', [
     'ngAnimate',
@@ -15,8 +17,7 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch',
-    'firebase'
+    'ngTouch'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -24,9 +25,9 @@ angular
         templateUrl: 'app/core/views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/chatroom', {
-        templateUrl: 'app/core/views/chatroom.html',
-        controller: 'ChatroomCtrl'
+      .when('/about', {
+        templateUrl: 'app/core/views/about.html',
+        controller: 'AboutCtrl'
       })
       .otherwise({
         redirectTo: '/'
