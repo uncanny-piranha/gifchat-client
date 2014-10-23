@@ -11,7 +11,7 @@
 	        <li>
 	        	<h4><a ng-click="addFriend()">Add a Friend</a><h4>
 	        	<input ng-show="added" type="text" ng-model="newUser" class="form-control" placeholder="username...">
-				<button ng-show="added" type="submit" ng-click="setFriendUsername(newUser); addMessage('you are now connected!'); addFriend()" class="btn btn-xs" >Add Friend</button>
+				<button ng-show="added" type="submit" ng-click="setFriendUsername(newUser); addFriend()" class="btn btn-xs" >Add Friend</button>
 	        </li>
 	        <li ng-repeat="user in messages">
 	            <a ng-click="setFriendUsername(user.$id)">{{user.$id}}</a>
@@ -30,7 +30,7 @@
                 <h1>Welcome back {{username}}, you are now chatting with {{friendsName}}</h1>
 		        <div class="commentArea yolo" scroll-glue="glued">
 		        	<div ng-repeat="texts in privateMessages" ng-class="texts.username == username ? 'bubbledRight' : 'bubbledLeft'">
-		            {{texts.text}}
+		            <img src="{{texts.text}}">
 		        	</div>
 		        </div>
             </div>

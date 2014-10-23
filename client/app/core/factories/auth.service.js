@@ -74,7 +74,16 @@ angular.module('gifchatClientApp')
         }
       },
 
-
+      sendMessage: function(to, from, keyword) {
+        return $http.post('http://gifserver.azurewebsites.net/gifs', {
+          to: to,
+          from: from,
+          keyword: keyword
+        })
+        .error(function(err){
+          console.log(err);
+        });
+      },
       /**
        * Get auth token
        */
