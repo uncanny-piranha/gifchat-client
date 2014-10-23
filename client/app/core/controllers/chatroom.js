@@ -14,7 +14,6 @@ angular
   .controller('ChatroomCtrl', ChatroomCtrl);
 
   function ChatroomCtrl ($scope, Auth, $firebase, $location) {
-
     $scope.username = Auth.getCurrentUser();
     $scope.userMessage;
     $scope.newUser;
@@ -33,8 +32,8 @@ angular
     $scope.messages = sync.$asArray();
 
     $scope.addMessage = function(text) {
-      // should post to our server
       Auth.sendMessage($scope.friendsName, $scope.username, text);
+      $scope.userMessage = '';
     };
 
     $scope.setFriendUsername = function(user){

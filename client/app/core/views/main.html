@@ -4,10 +4,10 @@
       <div ng-hide="isLoggedIn()">
         <h1 class="margin-base-vertical">Welcome to Gifchat</h1>
           <p>
-            A picture means a thousand words, however a gif means 10,000
+            a gif is worth 10,000 words.
           </p>
           <p>
-            If you're new signup! Else Sign in below
+            if you're new, sign up! otherwise log in below.
           </p>
           <div ng-hide="activeLogin || activeSignup">
             <a ng-click="activateLogin()">
@@ -51,25 +51,6 @@
             A username is required
           </p>
         </div>
-<!--
-        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
-                                            'has-error': form.email.$invalid && submitted }">
-          <label>Email</label>
-          <p class="input-group">
-              <span class="input-group-addon"><span class="icon-envelope"></span></span>
-              <input type="email" name="email" class="form-control" ng-model="user.email"
-                 placeholder=" johnsmith@example.com" required mongoose-error/>
-          </p>
-          <p class="help-block" ng-show="form.email.$error.email && submitted">
-            Doesn't look like a valid email.
-          </p>
-          <p class="help-block" ng-show="form.email.$error.required && submitted">
-            What's your email address?
-          </p>
-          <p class="help-block" ng-show="form.email.$error.mongoose">
-            {{ errors.email }}
-          </p>
-        </div> -->
 
         <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
                                             'has-error': form.password.$invalid && submitted }">
@@ -98,20 +79,6 @@
         </div>
 
         <hr>
-
-        <!-- UNCOMMENT FOR FACEBOOK/GOOGLE/TWITTER SIGNUP -->
-        <!-- <div>
-          <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
-            <i class="fa fa-facebook"></i> Connect with Facebook
-          </a>
-          <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
-            <i class="fa fa-google-plus"></i> Connect with Google+
-          </a>
-          <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
-            <i class="fa fa-twitter"></i> Connect with Twitter
-          </a>
-        </div> -->
-
 
       </form>
 
@@ -149,19 +116,6 @@
 
         <hr>
 
-        <!-- UNCOMMENT FOR FACEBOOK/GOOGLE/TWITTER LOGIN -->
-
-        <!-- <div>
-          <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
-            <i class="fa fa-facebook"></i> Connect with Facebook
-          </a>
-          <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
-            <i class="fa fa-google-plus"></i> Connect with Google+
-          </a>
-          <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
-            <i class="fa fa-twitter"></i> Connect with Twitter
-          </a>
-        </div> -->
       </form>
       <!-- End og signinForm -->
 
