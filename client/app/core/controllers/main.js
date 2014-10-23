@@ -13,7 +13,6 @@ angular.module('gifchatClientApp')
     $scope.user = {};
     $scope.errors = {};
     $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.activeLogin=false;
     $scope.activeSignup=false;
