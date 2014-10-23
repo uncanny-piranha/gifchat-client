@@ -13,13 +13,9 @@ angular
   .module('gifchatClientApp')
   .controller('ChatroomCtrl', ChatroomCtrl);
 
-  function ChatroomCtrl ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-    $scope.username = Auth.getCurrentUser().name
+  function ChatroomCtrl ($scope, Auth, $firebase, $location) {
+
+    $scope.username = Auth.getCurrentUser();
     $scope.userMessage;
     $scope.newUser;
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -49,7 +45,7 @@ angular
       var otherSync = $firebase(otherUserRef)
       var synchy = $firebase(userRef);
       $scope.friendsMessages = otherSync.$asArray();
-      $scope.privateMessages = synchy.$asArray(); 
+      $scope.privateMessages = synchy.$asArray();
     }
     $scope.addFriend = function() {
       $scope.added = !$scope.added;

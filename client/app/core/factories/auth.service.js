@@ -2,9 +2,9 @@
 
 angular.module('gifchatClientApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
-    var currentUser = {};
+    var currentUser = '';
     if($cookieStore.get('token')) {
-      currentUser = User.get();
+      currentUser = $cookieStore.get('username');
     }
 
     return {
@@ -16,27 +16,20 @@ angular.module('gifchatClientApp')
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      login: function(user, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
+      login: function(user) {
 
-        $http.post('/auth/local', {
+        return $http.post('http://gifserver.azurewebsites.net/users/login', {
           email: user.email,
           password: user.password
         }).
         success(function(data) {
           $cookieStore.put('token', data.token);
-          currentUser = User.get();
-          deferred.resolve(data);
-          return cb();
-        }).
-        error(function(err) {
-          this.logout();
-          deferred.reject(err);
-          return cb(err);
-        }.bind(this));
-
-        return deferred.promise;
+          $cookieStore.put('username', data.username);
+          currentUser = data.username;
+        })
+        .error(function(err){
+          console.log(err);
+        });
       },
 
       /**
@@ -46,7 +39,7 @@ angular.module('gifchatClientApp')
        */
       logout: function() {
         $cookieStore.remove('token');
-        currentUser = {};
+        currentUser = '';
       },
 
       /**
@@ -63,8 +56,8 @@ angular.module('gifchatClientApp')
           password: user.password
         })
         .success(function(data){
-          console.log(data);
-        })
+          $cookieStore.put('token', data.token);
+        });
       },
 
       /**
@@ -103,7 +96,12 @@ angular.module('gifchatClientApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
-        return currentUser.hasOwnProperty('role');
+        // if (token) return true;
+        if ($cookieStore.get('token')) {
+          return true;
+        } else {
+          return false;
+        }
       },
 
       /**
