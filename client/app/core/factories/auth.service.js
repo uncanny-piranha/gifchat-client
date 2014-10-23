@@ -42,7 +42,7 @@ angular.module('gifchatClientApp')
        * Create a new user
        *
        */
-      createUser: function(user, callback) {
+      createUser: function(user) {
         return $http.post('http://gifserver.azurewebsites.net/users/signup', {
           username: user.name,
           email: user.email,
@@ -50,6 +50,8 @@ angular.module('gifchatClientApp')
         })
         .success(function(data){
           $cookieStore.put('token', data.token);
+          $cookieStore.put('username', data.username);
+          currentUser = data.username;
         });
       },
 
