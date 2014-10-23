@@ -23,8 +23,7 @@ angular.module('gifchatClientApp')
 
       if(form.$valid) {
         Auth.createUser({
-          name: $scope.user.name,
-          email: $scope.user.email,
+          username: $scope.user.username,
           password: $scope.user.password
         })
         .then( function() {
@@ -49,7 +48,7 @@ angular.module('gifchatClientApp')
 
       if(form.$valid) {
         Auth.login({
-          email: $scope.user.email,
+          username: $scope.user.username,
           password: $scope.user.password
         })
         .then( function() {
