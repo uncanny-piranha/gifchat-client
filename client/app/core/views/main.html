@@ -44,7 +44,7 @@
           <label>Username</label>
           <p class="input-group">
               <span class="input-group-addon"><span class="icon-envelope"></span></span>
-              <input type="text" name="username" class="form-control" ng-model="user.username"
+              <input type="text" name="username" class="form-control" ng-model="user.username" ng-keydown="errors.other=''"
                  placeholder=" e.g. hacker-dude23" required />
           </p>
           <p class="help-block" ng-show="form.username.$error.required && submitted">
@@ -70,6 +70,9 @@
             {{ errors.password }}
           </p>
         </div>
+        <div class="form-group has-error">
+          <p class="help-block">{{ errors.other }}</p>
+        </div>
 
         <div>
           <button class="btn btn-inverse btn-lg btn-login" type="submit">
@@ -88,13 +91,13 @@
         <div class="form-group">
           <label>Username</label>
 
-          <input type="username" name="username" class="form-control" ng-model="user.username" required>
+          <input type="username" name="username" class="form-control" ng-model="user.username" ng-keydown="errors.other=''" required>
         </div>
 
         <div class="form-group">
           <label>Password</label>
 
-          <input type="password" name="password" class="form-control" ng-model="user.password" required>
+          <input type="password" name="password" class="form-control" ng-model="user.password" ng-keydown="errors.other=''" required>
         </div>
 
         <div class="form-group has-error">

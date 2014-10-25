@@ -21,6 +21,7 @@ angular.module('gifchatClientApp')
       $scope.submitted = true;
 
       if(form.$valid) {
+        $scope.errors= {};
         Auth.createUser({
           username: $scope.user.username,
           password: $scope.user.password
@@ -30,9 +31,10 @@ angular.module('gifchatClientApp')
           $location.path('/chatroom');
         })
         .catch( function(err) {
-          err = err.data;
-          $scope.errors = {};
+          console.log('caught signup error ' + JSON.stringify(err));
+          $scope.errors.other = err.data;
 
+          err = err.data;
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);
@@ -44,7 +46,7 @@ angular.module('gifchatClientApp')
 
     $scope.login = function(form) {
       $scope.submitted = true;
-
+      $scope.errors = {};
       if(form.$valid) {
         Auth.login({
           username: $scope.user.username,
@@ -55,7 +57,7 @@ angular.module('gifchatClientApp')
           $location.path('/chatroom');
         })
         .catch( function(err) {
-          $scope.errors.other = err.message;
+          $scope.errors.other = err.data;
         });
       }
     };
