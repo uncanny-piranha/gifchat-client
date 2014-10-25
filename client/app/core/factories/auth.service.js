@@ -90,6 +90,10 @@ angular.module('gifchatClientApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+
+      isAuth: function() {
+        return !!$cookieStore.get('token');
       }
     };
   });
