@@ -15,6 +15,7 @@
     <!-- styles:css -->
     <link rel="stylesheet" href="app/core/styles/chatroom.css">
     <link rel="stylesheet" href="app/core/styles/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <!-- endinject -->
 
 
@@ -25,21 +26,28 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <!-- if logged in, show logout button here -->
           <li class="active"><a ng-href="#">Home</a></li>
-          <li class=""><a class="btn btn-default" ng-click="activate()">Toggle Menu</a></li>
+          <li> </li>
+          <li class="">
+            <a class="btn btn-default" ng-click="activate()">Toggle Menu</a>
+          </li>
         </ul>
-        <h3 class="text-muted">gifchat</h3>
-      </div>
+        <h3 class="gifchat">gifchat</h3>
+        </div>
+
       <div ng-view=""></div>
+
+<!-- 
+    MATT: took out the yeoman footer that was taking up precious gif space if y'all don't mind.
 
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from <a href="https://github.com/uncanny-piranha/">uncanny-piranha</a> </p>
-      </div>
-    </div>
+      </div> 
+-->
+
 
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
@@ -62,6 +70,8 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.2/src/scrollglue.js"></script>
+
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
     <script src="bower_components/mockfirebase/dist/mockfirebase.js"></script>
