@@ -15,38 +15,35 @@
     <!-- styles:css -->
     <link rel="stylesheet" href="app/core/styles/chatroom.css">
     <link rel="stylesheet" href="app/core/styles/main.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <!-- endinject -->
 
 
   </head>
-  <body ng-app="gifchatClientApp">
+  <body ng-app="gifchatClientApp" ng-controller="RootCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <!-- if logged in, show logout button here -->
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li> </li>
-          <li class="">
-            <a class="btn btn-default" ng-click="activate()">Toggle Menu</a>
-          </li>
-        </ul>
-        <h3 class="gifchat">gifchat</h3>
-        </div>
+          <div class="header">
 
-      <div ng-view=""></div>
+              <!-- if logged in, show logout button here -->
 
-<!-- 
+                <a class="hamburger-link pull-left" ng-click="activate()">
+                  <img class="hamburger-image" src="../../images/hamburger.png"></img>
+                </a>
+
+
+            <h3 class="gifchat">gifchat</h3>
+            </div>
+          <div ng-view=""></div>
+<!--
     MATT: took out the yeoman footer that was taking up precious gif space if y'all don't mind.
 
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from <a href="https://github.com/uncanny-piranha/">uncanny-piranha</a> </p>
-      </div> 
--->
+      </div>
+
 
 
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -70,8 +67,6 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.2/src/scrollglue.js"></script>
-
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
     <script src="bower_components/mockfirebase/dist/mockfirebase.js"></script>
@@ -82,6 +77,7 @@
     <script src="app/app.js"></script>
     <script src="app/core/controllers/chatroom.js"></script>
     <script src="app/core/controllers/main.js"></script>
+    <script src="app/core/controllers/root.js"></script>
     <script src="app/core/directives/mongoose-error.directive.js"></script>
     <script src="app/core/factories/auth.service.js"></script>
     <!-- endinject -->
