@@ -20,33 +20,30 @@
 
 
   </head>
-  <body ng-app="gifchatClientApp">
+  <body ng-app="gifchatClientApp" ng-controller="RootCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <!-- if logged in, show logout button here -->
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li> </li>
-          <li class="">
-            <a class="btn btn-default" ng-click="activate()">Toggle Menu</a>
-          </li>
-        </ul>
-        <h3 class="gifchat">gifchat</h3>
-        </div>
+          <div class="header">
+            <ul class="nav nav-pills pull-left">
+              <!-- if logged in, show logout button here -->
+              <li class="">
+                <a class="btn btn-default" ng-click="activate()">Toggle Menu</a>
+              </li>
+            </ul>
+            <h3 class="gifchat">gifchat</h3>
+            </div>
 
-      <div ng-view=""></div>
-
+          <div ng-view=""></div>
 <!-- 
     MATT: took out the yeoman footer that was taking up precious gif space if y'all don't mind.
 
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from <a href="https://github.com/uncanny-piranha/">uncanny-piranha</a> </p>
       </div> 
--->
+
 
 
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -80,6 +77,7 @@
     <!-- endbuild -->
     <!-- app:js -->
     <script src="app/app.js"></script>
+    <script src="app/core/controllers/root.js"></script>
     <script src="app/core/controllers/chatroom.js"></script>
     <script src="app/core/controllers/main.js"></script>
     <script src="app/core/directives/mongoose-error.directive.js"></script>

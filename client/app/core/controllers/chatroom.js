@@ -24,7 +24,6 @@ angular
     $scope.usernameFriend;
     $scope.friendsName;
     $scope.chosenPrivate=false;
-    $scope.active=false;
     $scope.added=false;
 
     var linkRef = new Firebase("https://sizzling-fire-1984.firebaseio.com/usernames/"+$scope.username+ "/" +"messages");
@@ -48,10 +47,6 @@ angular
     };
     $scope.addFriend = function() {
       $scope.added = !$scope.added;
-    };
-
-    $scope.activate = function(){
-      $scope.active = !$scope.active;
     };
 
     $scope.logout = function() {
