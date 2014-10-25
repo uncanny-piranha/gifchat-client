@@ -16,22 +16,24 @@ angular.module('gifchatClientApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.activeLogin=false;
     $scope.activeSignup=false;
+    $scope.loading=false; //determines whether or not loading gif is displayed
 
     $scope.register = function(form) {
       $scope.submitted = true;
-
       if(form.$valid) {
+        $scope.loading=true;
         $scope.errors= {};
         Auth.createUser({
           username: $scope.user.username,
           password: $scope.user.password
         })
         .then( function() {
+          $scope.loading=false;
           // Account created, redirect to home
           $location.path('/chatroom');
         })
         .catch( function(err) {
-          console.log('caught signup error ' + JSON.stringify(err));
+          $scope.loading=false;
           $scope.errors.other = err.data;
 
           err = err.data;
@@ -48,15 +50,18 @@ angular.module('gifchatClientApp')
       $scope.submitted = true;
       $scope.errors = {};
       if(form.$valid) {
+        $scope.loading=true;
         Auth.login({
           username: $scope.user.username,
           password: $scope.user.password
         })
         .then( function() {
+          $scope.loading=false;
           // Logged in, redirect to home
           $location.path('/chatroom');
         })
         .catch( function(err) {
+          $scope.loading=false;
           $scope.errors.other = err.data;
         });
       }
