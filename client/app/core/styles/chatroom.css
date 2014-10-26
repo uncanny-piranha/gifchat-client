@@ -1,6 +1,6 @@
-/*  
+/*
 
-matt css  
+matt css
 
 */
 
@@ -9,16 +9,18 @@ matt css
     max-width: 600px;
 }
 
-/*  
+/*
 
-adams css  
+adams css
 
 */
-
+.actual-gif {
+  width: 100%;
+}
 .commentArea {
     font: 14px Arial;
     padding: 0 10px;
-    margin-top: 20px;    
+    margin-top: 20px;
 }
 
 .bubbledLeft,.bubbledRight {
@@ -82,7 +84,7 @@ adams css
     content: "";
 }
 
-.scroll-table 
+.scroll-table
 	height 10px
     overflow auto
 .giffy

@@ -33,9 +33,9 @@
           var viewHeight = $( window ).height() - 280;
           $('.yolo').css( 'height', viewHeight );
         </script>
-      	
+
         <div ng-repeat="texts in privateMessages" ng-class="texts.username == username ? 'bubbledRight' : 'bubbledLeft'">
-          <img src="{{texts.text}}">
+          <img class="actual-gif" src="{{texts.text}}">
 
         	</div>
 
