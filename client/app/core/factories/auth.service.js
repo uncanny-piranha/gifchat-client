@@ -51,6 +51,9 @@ angular.module('gifchatClientApp')
           $cookieStore.put('token', data.token);
           $cookieStore.put('username', data.username);
           currentUser = data.username;
+        })
+        .error(function(err){
+          console.log(err);
         });
       },
 
