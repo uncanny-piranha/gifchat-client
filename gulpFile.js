@@ -176,13 +176,17 @@ function wireBowerDist(){
 function stylesDist() {
   return gulp.src(paths.styles)
     .pipe($.concat('app.min.css'))
+    .pipe($.cssmin())
     .pipe(gulp.dest(dist.styles));
 }
 // Do stuff to our scripts
 //=====================================
 function scriptsDist() {
   return gulp.src(paths.scripts)
+    // ngAnnotate makes sure things are declared in a way that they can be minified
+    .pipe($.ngAnnotate({add: true}))
     .pipe($.concat('app.min.js'))
+    .pipe($.uglify())
     .pipe(gulp.dest(dist.scripts));
 }
 // Task that copies all files in our client root folder (not anything inside a folder)
