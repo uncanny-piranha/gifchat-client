@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gifchatClientApp')
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  .factory('Auth', function Auth($location, $rootScope, $http, $cookieStore, $q) {
     var currentUser = '';
     if($cookieStore.get('token')) {
       currentUser = $cookieStore.get('username');
@@ -16,7 +16,7 @@ angular.module('gifchatClientApp')
       login: function(user) {
 
         return $http.post('http://gifserver.azurewebsites.net/users/login', {
-          email: user.email,
+          username: user.username,
           password: user.password
         }).
         success(function(data) {
@@ -44,14 +44,16 @@ angular.module('gifchatClientApp')
        */
       createUser: function(user) {
         return $http.post('http://gifserver.azurewebsites.net/users/signup', {
-          username: user.name,
-          email: user.email,
+          username: user.username,
           password: user.password
         })
         .success(function(data){
           $cookieStore.put('token', data.token);
           $cookieStore.put('username', data.username);
           currentUser = data.username;
+        })
+        .error(function(err){
+          console.log(err);
         });
       },
 
@@ -91,6 +93,10 @@ angular.module('gifchatClientApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+
+      isAuth: function() {
+        return !!$cookieStore.get('token');
       }
     };
   });

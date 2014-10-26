@@ -13,28 +13,30 @@ angular.module('gifchatClientApp')
     $scope.user = {};
     $scope.errors = {};
     $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.activeLogin=false;
     $scope.activeSignup=false;
+    $scope.loading=false; //determines whether or not loading gif is displayed
 
     $scope.register = function(form) {
       $scope.submitted = true;
-
       if(form.$valid) {
+        $scope.loading=true;
+        $scope.errors= {};
         Auth.createUser({
-          name: $scope.user.name,
-          email: $scope.user.email,
+          username: $scope.user.username,
           password: $scope.user.password
         })
         .then( function() {
+          $scope.loading=false;
           // Account created, redirect to home
           $location.path('/chatroom');
         })
         .catch( function(err) {
-          err = err.data;
-          $scope.errors = {};
+          $scope.loading=false;
+          $scope.errors.other = err.data;
 
+          err = err.data;
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);
@@ -46,18 +48,21 @@ angular.module('gifchatClientApp')
 
     $scope.login = function(form) {
       $scope.submitted = true;
-
+      $scope.errors = {};
       if(form.$valid) {
+        $scope.loading=true;
         Auth.login({
-          email: $scope.user.email,
+          username: $scope.user.username,
           password: $scope.user.password
         })
         .then( function() {
+          $scope.loading=false;
           // Logged in, redirect to home
           $location.path('/chatroom');
         })
         .catch( function(err) {
-          $scope.errors.other = err.message;
+          $scope.loading=false;
+          $scope.errors.other = err.data;
         });
       }
     };
