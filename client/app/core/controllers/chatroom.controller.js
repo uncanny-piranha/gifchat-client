@@ -1,13 +1,6 @@
 ;(function(){
   'use strict';
-
-/**
- * @ngdoc function
- * @name gifchatClientApp.controller:AboutCtrl
- * @description
- * # AboutCtrl
- * Controller of the gifchatClientApp
- */
+// Controller for chatroom.
 
 angular
   .module('gifchatClientApp')
@@ -17,10 +10,7 @@ angular
     $scope.username = Auth.getCurrentUser();
     $scope.userMessage;
     $scope.newUser;
-    $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.privateMessage = false;
-    $scope.privateMessageHash;
-    $scope.privateMessageURL;
     $scope.usernameFriend;
     $scope.friendsName;
     $scope.chosenPrivate=false;

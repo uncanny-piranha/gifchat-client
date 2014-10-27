@@ -19,7 +19,7 @@
 
 
   </head>
-  <body ng-app="gifchatClientApp" ng-controller="RootCtrl">
+  <body ng-app="gifchatClientApp" ng-controller="LoggedInCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -67,9 +67,9 @@
     <!-- endbuild -->
     <!-- app:js -->
     <script src="app/app.js"></script>
-    <script src="app/core/controllers/chatroom.js"></script>
-    <script src="app/core/controllers/main.js"></script>
-    <script src="app/core/controllers/root.js"></script>
+    <script src="app/core/controllers/chatroom.controller.js"></script>
+    <script src="app/core/controllers/home.controller.js"></script>
+    <script src="app/core/controllers/loggedIn.controller.js"></script>
     <script src="app/core/directives/mongoose-error.directive.js"></script>
     <script src="app/core/factories/auth.service.js"></script>
     <!-- endinject -->
