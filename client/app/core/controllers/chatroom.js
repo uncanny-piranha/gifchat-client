@@ -26,7 +26,7 @@ angular
     $scope.chosenPrivate=false;
     $scope.added=false;
 
-    var linkRef = new Firebase("https://sizzling-fire-1984.firebaseio.com/usernames/"+$scope.username+ "/" +"messages");
+    var linkRef = new Firebase("https://scalding-fire-2109.firebaseio.com/usernames/"+$scope.username+ "/" +"messages");
     var sync = $firebase(linkRef);
     $scope.messages = sync.$asArray();
 
@@ -35,15 +35,30 @@ angular
       $scope.userMessage = '';
     };
 
+    $scope.clearUnreadMessages = function(name){
+      if(name){
+        var friendsRef = new Firebase("https://scalding-fire-2109.firebaseio.com/usernames/" + $scope.username + '/' +"messages"+ "/" + name);
+        var unread = friendsRef.child('unread');
+        unread.set('0');
+      }
+    };
+
     $scope.setFriendUsername = function(user){
       $scope.friendsName = user;
       $scope.chosenPrivate=true;
-      var userRef = new Firebase("https://sizzling-fire-1984.firebaseio.com/usernames/" + $scope.username + '/' +"messages"+ "/" + user);
-      var otherUserRef = new Firebase("https://sizzling-fire-1984.firebaseio.com/usernames/" + user + '/' +"messages"+ "/" + $scope.username);
-      var otherSync = $firebase(otherUserRef);
-      var synchy = $firebase(userRef);
-      $scope.friendsMessages = otherSync.$asArray();
-      $scope.privateMessages = synchy.$asArray();
+      var userRef = new Firebase("https://scalding-fire-2109.firebaseio.com/usernames/" + $scope.username + '/' +"messages"+ "/" + user);
+      var otherUserRef = new Firebase("https://scalding-fire-2109.firebaseio.com/usernames/" + user + '/' +"messages"+ "/" + $scope.username);
+      var userMsg = userRef.child('messages');
+      var otherUserMsg = otherUserRef.child('messages');
+      var otherUserSync = $firebase(otherUserMsg);
+      var userSync = $firebase(userMsg);
+
+      //Set unread for this friend to 0
+      var unread = userRef.child('unread');
+      unread.set('0');
+
+      $scope.friendsMessages = otherUserSync.$asArray();
+      $scope.privateMessages = userSync.$asArray();
     };
     $scope.addFriend = function() {
       $scope.added = !$scope.added;

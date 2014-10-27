@@ -12,8 +12,9 @@
       	<input ng-show="added" type="text" ng-model="newUser" class="form-control" placeholder="username...">
 				<button ng-show="added" type="submit" ng-click="setFriendUsername(newUser); addFriend()" class="btn btn-xs" >Add Friend</button>
       </li>
-      <li ng-repeat="user in messages">
-        <a ng-click="setFriendUsername(user.$id)">{{user.$id}}</a>
+      <li ng-repeat="user in messages" ng-class="user.unread == 1 && user.$id !==friendsName ? 'unread-message' : 'no-unread-message'">
+        <a ng-click="clearUnreadMessages(friendsName); setFriendUsername(user.$id)">{{user.$id}}</a>
+        <!-- <span ng-class="user.unread == 1 ? 'unread-message' : 'no-unread-message'"></span> -->
       </li>
       <li>
       	<h3><a href="" ng-click="logout()">Logout</a><h3>
