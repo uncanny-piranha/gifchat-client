@@ -8,13 +8,8 @@ angular.module('gifchatClientApp')
     }
 
     return {
-
-      /**
-       * Authenticate user and save token
-       *
-       */
+      // stores username and token in cookieStore
       login: function(user) {
-
         return $http.post('http://gifserver.azurewebsites.net/users/login', {
           username: user.username,
           password: user.password
@@ -28,20 +23,13 @@ angular.module('gifchatClientApp')
           console.log(err);
         });
       },
-
-      /**
-       * Delete access token and user info
-       *
-       */
+      // Deletes info from cookieStore
       logout: function() {
         $cookieStore.remove('token');
+        $cookieStore.remove('username');
         currentUser = '';
       },
-
-      /**
-       * Create a new user
-       *
-       */
+      // creates a new user in DB, then does the same thing that login does.
       createUser: function(user) {
         return $http.post('http://gifserver.azurewebsites.net/users/signup', {
           username: user.username,
@@ -57,19 +45,11 @@ angular.module('gifchatClientApp')
         });
       },
 
-
-      /**
-       * Gets all available info on authenticated user
-       *
-       */
+      // Gets available info on current user (at this time, just the username)
       getCurrentUser: function() {
         return currentUser;
       },
-
-      /**
-       * Check if a user is logged in
-       *
-       */
+      // Checks if the user is logged in (if token exist);
       isLoggedIn: function() {
         if ($cookieStore.get('token')) {
           return true;
@@ -77,7 +57,7 @@ angular.module('gifchatClientApp')
           return false;
         }
       },
-
+      // Sends message to our DB
       sendMessage: function(to, from, keyword) {
         return $http.post('http://gifserver.azurewebsites.net/gifs', {
           to: to,
@@ -88,15 +68,9 @@ angular.module('gifchatClientApp')
           console.log(err);
         });
       },
-      /**
-       * Get auth token
-       */
+      // returns auth token from local storage
       getToken: function() {
         return $cookieStore.get('token');
-      },
-
-      isAuth: function() {
-        return !!$cookieStore.get('token');
       }
     };
   });
