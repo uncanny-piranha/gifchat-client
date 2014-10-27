@@ -3,7 +3,8 @@
 }
 
 html {
-    background: url(../../../images/background.gif) no-repeat center center fixed;
+    background: url(../../../images/background.png);
+    background-repeat: repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
