@@ -11,7 +11,6 @@ angular
     $scope.userMessage;
     $scope.newUser;
     $scope.privateMessage = false;
-    $scope.usernameFriend;
     $scope.friendsName;
     $scope.chosenPrivate=false;
     $scope.added=false;
