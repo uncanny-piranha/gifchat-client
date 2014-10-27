@@ -25,7 +25,7 @@
   <!-- Page Content -->
 	<div id="page-content-wrapper">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" ng-show="friendsName">
         <h1>Welcome back {{username}}, you are now chatting with {{friendsName}}</h1>
         <div class="commentArea yolo" scroll-glue="glued">
 
@@ -46,7 +46,7 @@
             </script>
         </div>
       </div>
-      <footer>
+      <footer ng-show="friendsName">
         <form ng-submit="addMessage(userMessage)" class="inputform">
         	<input type="text" ng-model="userMessage" class="inputbutton" placeholder="please type a word or short phrase search term for gifs">
   			  <button type="submit" class="btn btn-default">Send</button>
