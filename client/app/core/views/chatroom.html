@@ -12,8 +12,9 @@
       	<input ng-show="added" type="text" ng-model="newUser" class="form-control" placeholder="username...">
 				<button ng-show="added" type="submit" ng-click="setFriendUsername(newUser); addFriend()" class="btn btn-xs" >Add Friend</button>
       </li>
-      <li ng-repeat="user in messages">
-        <a ng-click="setFriendUsername(user.$id)">{{user.$id}}</a>
+      <li ng-repeat="user in messages" ng-class="user.unread == 1 && user.$id !==friendsName ? 'unread-message' : 'no-unread-message'">
+        <a ng-click="clearUnreadMessages(friendsName); setFriendUsername(user.$id)">{{user.$id}}</a>
+        <!-- <span ng-class="user.unread == 1 ? 'unread-message' : 'no-unread-message'"></span> -->
       </li>
       <li>
       	<h3><a href="" ng-click="logout()">Logout</a><h3>
@@ -25,7 +26,7 @@
   <!-- Page Content -->
 	<div id="page-content-wrapper">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" ng-show="friendsName">
         <h1>Welcome back {{username}}, you are now chatting with {{friendsName}}</h1>
         <div class="commentArea yolo" scroll-glue="glued">
 
@@ -33,9 +34,9 @@
           var viewHeight = $( window ).height() - 280;
           $('.yolo').css( 'height', viewHeight );
         </script>
-      	
+
         <div ng-repeat="texts in privateMessages" ng-class="texts.username == username ? 'bubbledRight' : 'bubbledLeft'">
-          <img src="{{texts.text}}">
+          <img class="actual-gif" src="{{texts.text}}">
 
         	</div>
 
@@ -46,7 +47,7 @@
             </script>
         </div>
       </div>
-      <footer>
+      <footer ng-show="friendsName">
         <form ng-submit="addMessage(userMessage)" class="inputform">
         	<input type="text" ng-model="userMessage" class="inputbutton" placeholder="please type a word or short phrase search term for gifs">
   			  <button type="submit" class="btn btn-default">Send</button>

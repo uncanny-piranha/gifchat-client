@@ -58,12 +58,12 @@
           <p class="input-group">
               <span class="input-group-addon"><span class="icon-envelope"></span></span>
               <input type="password" name="password" class="form-control" ng-model="user.password"
-                 ng-minlength="3"
-                 required
-                 mongoose-error/>
+                ng-minlength="3"
+                required
+                />
           </p>
           <p class="help-block"
-             ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
+            ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
             Password must be at least 3 characters.
           </p>
           <p class="help-block" ng-show="form.password.$error.mongoose">

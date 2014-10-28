@@ -1,18 +1,15 @@
+(function(){
 'use strict';
 
-/**
- * @ngdoc function
- * @name gifchatClientApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the gifchatClientApp
- */
-angular.module('gifchatClientApp')
-  .controller('MainCtrl', function ($scope, $http, Auth, $location) {
+// Home Ctrl handles anything related to Signup / Log in forms
+// Any actual autentication is delegated out to the Auth factory.
+angular
+  .module('gifchatClientApp')
+  .controller('HomeCtrl', HomeCtrl);
 
+  function HomeCtrl($scope, $http, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
-    $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.activeLogin=false;
     $scope.activeSignup=false;
@@ -68,8 +65,10 @@ angular.module('gifchatClientApp')
     };
     $scope.activateLogin = function(){
       $scope.activeLogin = !$scope.activeLogin;
-    }
+    };
     $scope.activateSignup = function(){
       $scope.activeSignup = !$scope.activeSignup;
-    }
-  });
+    };
+  }
+
+})();
