@@ -14,12 +14,12 @@
     <!-- endbuild -->
     <!-- styles:css -->
     <link rel="stylesheet" href="app/core/styles/chatroom.css">
-    <link rel="stylesheet" href="app/core/styles/main.css">
+    <link rel="stylesheet" href="app/core/styles/home.css">
     <!-- endinject -->
 
 
   </head>
-  <body ng-app="gifchatClientApp" ng-controller="RootCtrl">
+  <body ng-app="gifchatClientApp" ng-controller="LoggedInCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -29,22 +29,14 @@
 
               <!-- if logged in, show logout button here -->
 
-                <a class="hamburger-link pull-left" ng-click="activate()">
+                <a class="hamburger-link pull-left" ng-show="isLoggedIn()" ng-click="activate()">
                   <img class="hamburger-image" src="../../images/hamburger.png"></img>
                 </a>
 
 
-            <h3 class="gifchat">gifchat</h3>
+            <h1 class="gifchat">gifchat</h3>
             </div>
           <div ng-view=""></div>
-<!--
-    MATT: took out the yeoman footer that was taking up precious gif space if y'all don't mind.
-
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from <a href="https://github.com/uncanny-piranha/">uncanny-piranha</a> </p>
-      </div>
-
-
 
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
@@ -75,10 +67,9 @@
     <!-- endbuild -->
     <!-- app:js -->
     <script src="app/app.js"></script>
-    <script src="app/core/controllers/chatroom.js"></script>
-    <script src="app/core/controllers/main.js"></script>
-    <script src="app/core/controllers/root.js"></script>
-    <script src="app/core/directives/mongoose-error.directive.js"></script>
+    <script src="app/core/controllers/chatroom.controller.js"></script>
+    <script src="app/core/controllers/home.controller.js"></script>
+    <script src="app/core/controllers/loggedIn.controller.js"></script>
     <script src="app/core/factories/auth.service.js"></script>
     <!-- endinject -->
 
